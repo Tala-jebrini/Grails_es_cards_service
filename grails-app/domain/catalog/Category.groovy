@@ -5,6 +5,7 @@ class Category {
     String name
     String iconPath
     Category parent
+    String description
 
     static hasMany = [children: Category]
 
@@ -12,5 +13,6 @@ class Category {
         parent nullable: true
         iconPath nullable: true
         name nullable: false
+        description nullable: false
     }
 }

@@ -43,28 +43,34 @@ class BootStrap {
 
         if (Category.count() == 0) {
             def ludo = new Category(
-                    name: "LUDO",
-                    iconPath: "categories/ludo.webp"
+                    name: "Yalla Ludo",
+                    iconPath: "categories/ludo.webp",
+                    description:"Direct Top-up for Yalla Ludo"
             ).save(failOnError: true)
 
             new Category(
                     name: "Diamond",
-                    parent: ludo
+                    parent: ludo,
+                    description:"Direct Diamond Top-up for Yalla Ludo"
             ).save(failOnError: true)
 
             new Category(
                     name: "Gold",
-                    parent: ludo
+                    parent: ludo,
+                    description:"Direct Gold Top-up for Yalla Ludo"
             ).save(failOnError: true)
 
             new Category(
                     name: "PUBG",
-                    iconPath: "categories/pubg.jpg"
+                    iconPath: "categories/pubg.jpg",
+                    description: "PUBG UC is in-game currency used to buy premium items like skins, outfits, and weapon upgrades in PUBG Mobile.\n"
+
             ).save(failOnError: true)
 
             new Category(
                     name: "XBOX",
-                    iconPath: "categories/xbox.png"
+                    iconPath: "categories/xbox.png",
+                    description:"Game Pass Ultimate is a Microsoft subscription offering 400-500 games across Xbox, PC, and cloud, plus online multiplayer and exclusive perks. It includes Xbox Game Pass, PC Game Pass, Xbox Game pass Core and EA Play."
             ).save(failOnError: true)
         }
     }

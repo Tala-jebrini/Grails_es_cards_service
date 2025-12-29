@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
+
 <meta name="layout" content="main"/>
 
 <asset:stylesheet src="category-show.css"/>
@@ -7,18 +8,26 @@
 <!-- CATEGORY HEADER -->
 <section class="category-header">
 
-<!-- ICON: parent icon if subcategory, otherwise own icon -->
   <g:if test="${category.parent}">
     <img class="category-main-icon"
          src="${assetPath(src: category.parent.iconPath)}"/>
     <h2>${category.parent.name} ${category.name}</h2>
+
+    <!-- show subcategory description -->
+    <p>${category.description}</p>
   </g:if>
 
   <g:else>
     <img class="category-main-icon"
          src="${assetPath(src: category.iconPath)}"/>
     <h2>${category.name}</h2>
+
+    <!-- show category description -->
+    <p>${category.description}</p>
   </g:else>
+
+</section>
+
 
 </section>
 

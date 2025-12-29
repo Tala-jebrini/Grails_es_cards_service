@@ -56,3 +56,10 @@
     font-size: 14px;
     white-space: nowrap;
 }
+.category-header p {
+    max-width: 600px;
+    margin: 10px auto 0;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.4;
+}
