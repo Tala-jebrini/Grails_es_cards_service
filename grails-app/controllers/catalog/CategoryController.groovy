@@ -10,12 +10,20 @@ class CategoryController {
         }
 
         def subCategories = Category.findAllByParent(category)
+        def products = []
+
+        if (!subCategories) {
+            // No subcategories → show products of this category
+            products = Product.findAllByCategory(category)
+        }
 
         [
                 category: category,
                 subCategories: subCategories,
+                products: products,
                 parent: category.parent
         ]
     }
+
 }
 

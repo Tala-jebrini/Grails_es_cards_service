@@ -1,5 +1,6 @@
 package es_cards_service
 
+import catalog.Product
 import marketing.Banner
 import catalog.Category
 
@@ -45,34 +46,121 @@ class BootStrap {
             def ludo = new Category(
                     name: "Yalla Ludo",
                     iconPath: "categories/ludo.webp",
-                    description:"Direct Top-up for Yalla Ludo"
+                    title:"Direct Top-up for Yalla Ludo"
             ).save(failOnError: true)
 
             new Category(
                     name: "Diamond",
                     parent: ludo,
-                    description:"Direct Diamond Top-up for Yalla Ludo"
+                    title:"Direct Diamond Top-up for Yalla Ludo",
+                    description:"Yalla Ludo Diamond Top-Up\n" +
+                            "This is a direct top-up service for Diamonds in your Yalla Ludo account.\n" +
+                            "The top-up process takes approximately 5 to 20 minutes to be completed and activated on your account.\n" +
+                            "Please enter your Player ID carefully, ensuring there are no mistakes, as Diamonds may be credited to the wrong account if the ID is entered incorrectly."
             ).save(failOnError: true)
 
             new Category(
                     name: "Gold",
                     parent: ludo,
-                    description:"Direct Gold Top-up for Yalla Ludo"
+                    title:"Direct Gold Top-up for Yalla Ludo",
+                    description: "Yalla Ludo Gold Top-Up\n" +
+                            "This is a direct top-up service for Gold in your Yalla Ludo account.\n" +
+                            "The top-up process takes approximately 5 to 20 minutes to be completed and activated on your account.\n" +
+                            "Please enter your Player ID carefully, ensuring there are no mistakes, as Gold may be credited to the wrong account if the ID is entered incorrectly."
             ).save(failOnError: true)
 
             new Category(
                     name: "PUBG",
                     iconPath: "categories/pubg.jpg",
-                    description: "PUBG UC is in-game currency used to buy premium items like skins, outfits, and weapon upgrades in PUBG Mobile.\n"
+                    title: "PUBG UC is in-game currency used to buy premium items like skins, outfits, and weapon upgrades in PUBG Mobile.\n",
+                    description: "1- Select the Unknown Cash UC Amount you want to Purchase.\n" +
+                            "2- Enter your PUBG Mobile Player ID.\n" +
+                            "3- Click Validate to make sure that the ID matches your Player name.\n" +
+                            "4- Click order now and make your purchase.\n" +
+                            "\n" +
+                            "You will receive your Pubg UC within 5-15 minutes from purchasing."
 
             ).save(failOnError: true)
 
             new Category(
                     name: "XBOX",
                     iconPath: "categories/xbox.png",
-                    description:"Game Pass Ultimate is a Microsoft subscription offering 400-500 games across Xbox, PC, and cloud, plus online multiplayer and exclusive perks. It includes Xbox Game Pass, PC Game Pass, Xbox Game pass Core and EA Play."
+                    title:"Game Pass Ultimate is a Microsoft subscription offering 400-500 games across Xbox, PC, and cloud, plus online multiplayer and exclusive perks. It includes Xbox Game Pass, PC Game Pass, Xbox Game pass Core and EA Play.",
+                    description:"You can only Request a new account for this Product.\n" +
+                            "\n" +
+                            "Game Pass Ultimate is a Microsoft subscription offering 400-500 games across Xbox, PC, and cloud, plus online multiplayer and exclusive perks. It includes Xbox Game Pass, PC Game Pass, Xbox Game pass Core and EA Play.\n" +
+                            "\n" +
+                            "View all the games by visiting this link: https://tinyurl.com/GPUltimate\n" +
+                            "\n" +
+                            "Charging delivery is within 60 minute."
             ).save(failOnError: true)
         }
+
+        if (Product.count() == 0) {
+
+            // Get the Yalla Ludo subcategories
+            def diamond = Category.findByName("Diamond")
+            def gold = Category.findByName("Gold")
+
+            new Product(
+                    name: "Yalla Ludo (2320) Diamond",
+                    price: 5.99,
+                    category: diamond
+            ).save(failOnError: true)
+
+            new Product(
+                    name: "Yalla Ludo (5,150) Diamond",
+                    price: 24.99,
+                    category: diamond
+            ).save(failOnError: true)
+
+            new Product(
+                    name: "Yalla Ludo (223,700) Gold",
+                    price: 4.99,
+                    category: gold
+            ).save(failOnError: true)
+
+            new Product(
+                    name: "Yalla Ludo (1,463,320) Gold",
+                    price: 14.99,
+                    category: gold
+            ).save(failOnError: true)
+
+            // For main category PUBG
+            def pubg = Category.findByName("PUBG")
+
+            new Product(
+                    name: "Pubg 60 UC",
+                    price: 0.99,
+                    category: pubg
+            ).save(failOnError: true)
+
+            new Product(
+                    name: "Pubg 325 UC",
+                    price: 9.99,
+                    category: pubg
+            ).save(failOnError: true)
+
+            // For main category PUBG
+            def xbox = Category.findByName("XBOX")
+
+            new Product(
+                    name: "Game pass ultimate 1 months (new user only)",
+                    price: 9.99,
+                    category: xbox
+            ).save(failOnError: true)
+            new Product(
+                    name: "Game pass ultimate 3 months (new user only)",
+                    price: 9.99,
+                    category: xbox
+            ).save(failOnError: true)
+            new Product(
+                    name: "Game pass ultimate 6 months (new user only)",
+                    price: 9.99,
+                    category: xbox
+            ).save(failOnError: true)
+        }
+
     }
 
     def destroy = {

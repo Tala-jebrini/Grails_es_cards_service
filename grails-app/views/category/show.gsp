@@ -14,7 +14,7 @@
     <h2>${category.parent.name} ${category.name}</h2>
 
     <!-- show subcategory description -->
-    <p>${category.description}</p>
+    <p>${category.title}</p>
   </g:if>
 
   <g:else>
@@ -23,7 +23,7 @@
     <h2>${category.name}</h2>
 
     <!-- show category description -->
-    <p>${category.description}</p>
+    <p>${category.title}</p>
   </g:else>
 
 </section>
@@ -53,3 +53,15 @@
     </g:each>
   </section>
 </g:if>
+
+<g:if test="${products}">
+  <section class="products-wrapper">
+    <g:each in="${products}" var="p">
+      <div class="product-card">
+        <h4>${p.name}</h4>
+        <p>$${p.price}</p>
+      </div>
+    </g:each>
+  </section>
+</g:if>
+

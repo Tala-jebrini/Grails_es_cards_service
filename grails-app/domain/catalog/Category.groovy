@@ -5,6 +5,7 @@ class Category {
     String name
     String iconPath
     Category parent
+    String title
     String description
 
     static hasMany = [children: Category]
@@ -13,6 +14,10 @@ class Category {
         parent nullable: true
         iconPath nullable: true
         name nullable: false
-        description nullable: false
+        title nullable: false
+        description nullable: true
+    }
+    static mapping = {
+        description type: 'text'   // <-- allows long descriptions
     }
 }

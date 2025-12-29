@@ -63,3 +63,20 @@
     color: #ccc;
     line-height: 1.4;
 }
+
+.products-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.product-card {
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: #111;
+    color: white;
+}
