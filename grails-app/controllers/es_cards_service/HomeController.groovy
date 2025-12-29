@@ -5,8 +5,10 @@ import catalog.Category
 
 class HomeController {
 
+
     def index() {
-        def categories = Category.list()
+
+        def categories = Category.findAllByParentIsNull()
         def banners = Banner.findAllByActive(true)
         //def offers = SpecialOffer.list()
         [categories: categories, banners: banners]//, offers: offers]

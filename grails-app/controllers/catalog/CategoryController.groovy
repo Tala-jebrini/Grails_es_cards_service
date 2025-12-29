@@ -1,6 +1,5 @@
 package catalog
 
-
 class CategoryController {
 
     def show(Long id) {
@@ -14,7 +13,8 @@ class CategoryController {
 
         [
                 category: category,
-                subCategories: subCategories
+                subCategories: subCategories,
+                parent: category.parent
         ]
     }
 }

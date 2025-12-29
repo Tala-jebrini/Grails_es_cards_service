@@ -3,6 +3,7 @@
 
 <asset:stylesheet src="home.css"/>
 
+
 <section class="hero-banner swiper">
     <div class="swiper-wrapper">
         <g:each in="${banners}" var="b">
@@ -16,13 +17,28 @@
 
 <section class="categories-banner">
     <div class="categories-wrapper">
+
         <g:each in="${categories}" var="c">
-            <div class="category-icon">
-                <asset:image src="${c.iconPath}" alt="${c.name}"/>
-            </div>
+            <a href="${createLink(controller:'category', action:'show', id: c.id)}"
+               class="category-slide">
+
+                <img class="category-icon-img"
+                     src="${assetPath(src: c.iconPath)}"
+                     alt="${c.name}"/>
+
+                <!-- TOOLTIP -->
+                <div class="category-tooltip">
+                    ${c.name}
+                </div>
+
+            </a>
         </g:each>
+
     </div>
 </section>
+
+
+
 
 <section class="special-offers">
     <g:each in="${offers}" var="o">
@@ -33,4 +49,23 @@
         </div>
     </g:each>
 </section>
-<script> var swiper = new Swiper('.hero-banner', { loop: true, autoplay: { delay: 5000 }, pagination: { el: '.swiper-pagination', clickable: true }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, }); </script>
+
+<script>
+    // Hero banner
+    new Swiper('.hero-banner', {
+        loop: true,
+        autoplay: { delay: 5000 },
+        pagination: { el: '.swiper-pagination', clickable: true }
+    });
+
+    // Categories slider
+    new Swiper('.categories-swiper', {
+        slidesPerView: 5,
+        spaceBetween: 20,
+        centeredSlides: true,
+        loop: true,
+        autoplay: { delay: 3000 }
+    });
+</script>
+
+

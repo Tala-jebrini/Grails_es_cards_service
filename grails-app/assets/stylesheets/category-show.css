@@ -1,0 +1,58 @@
+/* =========================
+   CATEGORY HEADER
+========================= */
+
+.category-header {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.category-main-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+}
+
+.category-header h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+
+/* =========================
+   SUBCATEGORIES
+========================= */
+
+.subcategories-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.subcategory-item {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s ease;
+}
+
+.subcategory-item:hover {
+    transform: scale(1.05);
+}
+
+.subcategory-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.subcategory-name {
+    margin-top: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+}
