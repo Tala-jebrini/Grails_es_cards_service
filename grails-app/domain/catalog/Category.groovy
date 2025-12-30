@@ -8,7 +8,8 @@ class Category {
     String title
     String description
 
-    static hasMany = [children: Category]
+    static belongsTo = [parent: Category]
+
 
     static constraints = {
         parent nullable: true

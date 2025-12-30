@@ -71,7 +71,7 @@ class BootStrap {
 
             new Category(
                     name: "PUBG",
-                    iconPath: "categories/pubg.jpg",
+                    iconPath: "categories/pubg.webp",
                     title: "PUBG UC is in-game currency used to buy premium items like skins, outfits, and weapon upgrades in PUBG Mobile.\n",
                     description: "1- Select the Unknown Cash UC Amount you want to Purchase.\n" +
                             "2- Enter your PUBG Mobile Player ID.\n" +
