@@ -1,5 +1,26 @@
 package catalog
 
+//class CategoryController {
+//
+//    def orderService
+//
+//    def show(Long id) {
+//        Category category = Category.get(id)
+//        if (!category) {
+//            flash.message = "Category not found"
+//            redirect(uri: "/")
+//            return
+//        }
+//
+//        // Fetch subcategories using service
+//        def subCategories = orderService.getSubcategories(category)
+//        def products = orderService.getProductsForCategory(category)
+//
+//        [category: category, subCategories: subCategories, products: products]
+//    }
+//}
+
+
 class CategoryController {
 
     def show(Long id) {

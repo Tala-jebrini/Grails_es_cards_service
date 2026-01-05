@@ -5,7 +5,7 @@ class Category {
     String name
     String iconPath
     Category parent
-    String title
+    String subDescription
     String description
 
     static belongsTo = [parent: Category]
@@ -15,7 +15,7 @@ class Category {
         parent nullable: true
         iconPath nullable: true
         name nullable: false
-        title nullable: false
+        subDescription nullable: false
         description nullable: true
     }
     static mapping = {

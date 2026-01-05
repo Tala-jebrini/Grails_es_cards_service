@@ -4,13 +4,20 @@ import auth.User
 
 class CustomerOrder {
 
-    User user
     Date createdAt = new Date()
+    String orderInfoJson
+
 
     static hasMany = [items: CustomerOrderItem]
     static belongsTo = [user: User]
 
     static constraints = {
-        user nullable: false
+        user nullable: true // guest
+        orderInfoJson nullable: true
+    }
+    static mapping = {
+        orderInfoJson type: 'text'
     }
 }
+
+

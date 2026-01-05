@@ -1,5 +1,6 @@
 package es_cards_service
 
+
 import catalog.Product
 import marketing.Banner
 import catalog.Category
@@ -7,6 +8,16 @@ import catalog.Category
 class BootStrap {
 
     def init = { servletContext ->
+
+
+        /* =========================
+          Users
+       ========================= */
+
+//        if (User.count() == 0) {
+//            new User(username: "john", email: "john@example.com", passwordHash: "hashedpass").save(failOnError:true)
+//            new User(username: "jane", email: "jane@example.com", passwordHash: "hashedpass").save(failOnError:true)
+//        }
 
         /* =========================
           BANNERS
@@ -46,13 +57,13 @@ class BootStrap {
             def ludo = new Category(
                     name: "Yalla Ludo",
                     iconPath: "categories/ludo.webp",
-                    title:"Direct Top-up for Yalla Ludo"
+                    subDescription:"Direct Top-up for Yalla Ludo"
             ).save(failOnError: true)
 
             new Category(
                     name: "Diamond",
                     parent: ludo,
-                    title:"Direct Diamond Top-up for Yalla Ludo",
+                    subDescription:"Direct Diamond Top-up for Yalla Ludo",
                     description:"Yalla Ludo Diamond Top-Up\n" +
                             "This is a direct top-up service for Diamonds in your Yalla Ludo account.\n" +
                             "The top-up process takes approximately 5 to 20 minutes to be completed and activated on your account.\n" +
@@ -62,7 +73,7 @@ class BootStrap {
             new Category(
                     name: "Gold",
                     parent: ludo,
-                    title:"Direct Gold Top-up for Yalla Ludo",
+                    subDescription:"Direct Gold Top-up for Yalla Ludo",
                     description: "Yalla Ludo Gold Top-Up\n" +
                             "This is a direct top-up service for Gold in your Yalla Ludo account.\n" +
                             "The top-up process takes approximately 5 to 20 minutes to be completed and activated on your account.\n" +
@@ -72,7 +83,7 @@ class BootStrap {
             new Category(
                     name: "PUBG",
                     iconPath: "categories/pubg.webp",
-                    title: "PUBG UC is in-game currency used to buy premium items like skins, outfits, and weapon upgrades in PUBG Mobile.\n",
+                    subDescription: "PUBG UC is in-game currency used to buy premium items like skins, outfits, and weapon upgrades in PUBG Mobile.\n",
                     description: "1- Select the Unknown Cash UC Amount you want to Purchase.\n" +
                             "2- Enter your PUBG Mobile Player ID.\n" +
                             "3- Click Validate to make sure that the ID matches your Player name.\n" +
@@ -85,7 +96,7 @@ class BootStrap {
             new Category(
                     name: "XBOX",
                     iconPath: "categories/xbox.png",
-                    title:"Game Pass Ultimate is a Microsoft subscription offering 400-500 games across Xbox, PC, and cloud, plus online multiplayer and exclusive perks. It includes Xbox Game Pass, PC Game Pass, Xbox Game pass Core and EA Play.",
+                    subDescription:"Game Pass Ultimate is a Microsoft subscription offering 400-500 games across Xbox, PC, and cloud, plus online multiplayer and exclusive perks. It includes Xbox Game Pass, PC Game Pass, Xbox Game pass Core and EA Play.",
                     description:"You can only Request a new account for this Product.\n" +
                             "\n" +
                             "Game Pass Ultimate is a Microsoft subscription offering 400-500 games across Xbox, PC, and cloud, plus online multiplayer and exclusive perks. It includes Xbox Game Pass, PC Game Pass, Xbox Game pass Core and EA Play.\n" +
@@ -95,6 +106,10 @@ class BootStrap {
                             "Charging delivery is within 60 minute."
             ).save(failOnError: true)
         }
+
+        /* =========================
+          PRODUCTS
+       ========================= */
 
         if (Product.count() == 0) {
 
@@ -160,6 +175,16 @@ class BootStrap {
                     category: xbox
             ).save(failOnError: true)
         }
+        /* =========================
+                  CARTS
+           ========================= */
+
+//        User.list().each { user ->
+//            if (!user.cart) {
+//                new Cart(user: user).save(failOnError: true)
+//            }
+//        }
+
 
     }
 

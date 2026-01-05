@@ -64,19 +64,83 @@
     line-height: 1.4;
 }
 
+
+/* CONTAINER */
+.products-order-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+/* PRODUCTS */
 .products-wrapper {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .product-card {
-    width: 150px;
+    width: 180px;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     border-radius: 8px;
     background: #111;
-    color: white;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.2s, transform 0.2s;
 }
+
+.product-card:hover {
+    transform: scale(1.03);
+}
+
+.product-card.selected {
+    border-color: #b6b3b0;
+}
+
+/* ORDER PANEL */
+.order-panel {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-panel h3 {
+    margin-bottom: 5px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls input {
+    width: 50px;
+    text-align: center;
+}
+
+.quantity-controls button {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.final-order-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.final-order-box button, .final-order-box .btn {
+    padding: 10px;
+    background: #ffffff;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
