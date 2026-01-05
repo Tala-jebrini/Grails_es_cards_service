@@ -2,7 +2,9 @@
 <meta name="layout" content="main"/>
 <asset:stylesheet src="category-show.css"/>
 
-<!-- CATEGORY HEADER -->
+<!-- =========================
+     CATEGORY HEADER
+========================= -->
 <section class="category-header">
   <g:if test="${category.parent}">
     <img class="category-main-icon" src="${assetPath(src: category.parent.iconPath)}"/>
@@ -16,7 +18,9 @@
   </g:else>
 </section>
 
-<!-- SUBCATEGORIES -->
+<!-- =========================
+     SUBCATEGORIES
+========================= -->
 <g:if test="${subCategories}">
   <section class="subcategories-wrapper">
     <g:each in="${subCategories}" var="sub">
@@ -29,14 +33,16 @@
   </section>
 </g:if>
 
-<!-- PRODUCTS + ORDER PANEL -->
+<!-- =========================
+     PRODUCTS + ORDER PANEL
+========================= -->
 <g:if test="${products}">
   <div class="products-order-container">
 
     <!-- LEFT: Products -->
     <section class="products-wrapper">
       <g:each in="${products}" var="p">
-        <div class="product-card" data-product-id="${p.id}">
+        <div class="product-card" data-product-id="${p.id}" data-price="${p.price}">
           <h4>${p.name}</h4>
           <p>$${p.price}</p>
         </div>
@@ -75,7 +81,9 @@
   </div>
 </g:if>
 
-<!-- JS for selecting product and updating total -->
+<!-- =========================
+     JS: Product Selection + Quantity + Total
+========================= -->
 <script>
   let selectedProduct = null
   const productCards = document.querySelectorAll('.product-card')
@@ -91,25 +99,25 @@
     }
   }
 
+  // Product selection
   productCards.forEach(card => {
     card.addEventListener('click', () => {
-      // deselect all
+      // Deselect all
       productCards.forEach(c => c.classList.remove('selected'))
-      // select this one
+      // Select this one
       card.classList.add('selected')
       selectedProduct = card
       selectedProductElem.textContent = card.querySelector('h4').textContent
       updateTotal()
     })
-    // store price as data attribute
-    const price = parseFloat(card.querySelector('p').textContent.replace('$',''))
-    card.dataset.price = price
   })
 
+  // Quantity controls
   document.getElementById('increase').addEventListener('click', () => {
     quantityInput.value = parseInt(quantityInput.value)+1
     updateTotal()
   })
+
   document.getElementById('decrease').addEventListener('click', () => {
     if(quantityInput.value > 1){
       quantityInput.value = parseInt(quantityInput.value)-1

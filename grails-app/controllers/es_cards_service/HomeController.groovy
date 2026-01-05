@@ -1,16 +1,12 @@
 package es_cards_service
 
-import marketing.Banner
-import catalog.Category
-
 class HomeController {
 
+    HomeService homeService // injection تلقائي
 
     def index() {
-
-        def categories = Category.findAllByParentIsNull()
-        def banners = Banner.findAllByActive(true)
-        //def offers = SpecialOffer.list()
-        [categories: categories, banners: banners]//, offers: offers]
+        def categories = homeService.getRootCategories()
+        def banners = homeService.getActiveBanners()
+        [categories: categories, banners: banners]
     }
 }
