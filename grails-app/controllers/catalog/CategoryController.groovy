@@ -13,7 +13,15 @@ class CategoryController {
 
         def subCategories = categoryService.getSubcategories(category)
         def products = categoryService.getProductsForCategory(category)
+        def orderOptions = categoryService.getOrderOptions(
+                category.parent ?: category
+        )
 
-        [category: category, subCategories: subCategories, products: products]
+        [
+                category     : category,
+                subCategories: subCategories,
+                products     : products,
+                orderOptions : orderOptions
+        ]
     }
 }

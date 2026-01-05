@@ -3,7 +3,7 @@ package catalog
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class ProductOptionSpec extends Specification implements DomainUnitTest<ProductOption> {
+class CategoryOptionSpec extends Specification implements DomainUnitTest<CategoryOption> {
 
     def setup() {
     }

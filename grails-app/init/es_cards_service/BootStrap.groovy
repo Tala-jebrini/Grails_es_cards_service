@@ -1,6 +1,6 @@
 package es_cards_service
 
-
+import catalog.CategoryOption
 import catalog.Product
 import marketing.Banner
 import catalog.Category
@@ -175,6 +175,27 @@ class BootStrap {
                     category: xbox
             ).save(failOnError: true)
         }
+
+        def pubg = Category.findByName("PUBG")
+
+        new CategoryOption(
+                category: pubg,
+                key: "gameId",
+                label: "PUBG Mobile Global ID",
+                type: "text",
+                placeholder: "Enter Player ID",
+                required: true
+        ).save(failOnError: true)
+
+        new CategoryOption(
+                category: pubg,
+                key: "username",
+                label: "Username",
+                type: "text",
+                placeholder: "Enter Username",
+                required: true
+        ).save(failOnError: true)
+
         /* =========================
                   CARTS
            ========================= */

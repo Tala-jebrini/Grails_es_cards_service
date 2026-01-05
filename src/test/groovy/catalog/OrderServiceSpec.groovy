@@ -1,7 +1,7 @@
 package catalog
 
 import grails.testing.services.ServiceUnitTest
-import OrderService
+import orders.OrderService
 import spock.lang.Specification
 
 class OrderServiceSpec extends Specification implements ServiceUnitTest<OrderService>{

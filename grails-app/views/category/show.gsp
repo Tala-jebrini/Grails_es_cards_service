@@ -65,8 +65,35 @@
         </div>
       </div>
 
-      <div class="final-order-box">
-        <h3>Order Info</h3>
+    <div class="order-options">
+      <h3>Order Information</h3>
+
+      <g:each in="${orderOptions}" var="opt">
+        <div class="order-option">
+
+          <label for="${opt.key}">
+            ${opt.label}
+            <g:if test="${opt.required}">
+              <span class="required">*</span>
+            </g:if>
+          </label>
+
+          <input
+                  id="${opt.key}"
+                  type="${opt.type}"
+                  name="${opt.key}"
+                  placeholder="${opt.placeholder}"
+                  <g:if test="${opt.required}">required</g:if>
+          />
+
+        </div>
+      </g:each>
+
+    </div>
+
+
+    <div class="final-order-box">
+
         <p id="order-total">Total: $0.00</p>
 
         <g:if test="${session.user}">
@@ -76,7 +103,8 @@
           <a href="/login" class="btn">Login to Order</a>
         </g:else>
       </div>
-    </section>
+
+  </section>
 
   </div>
 </g:if>
@@ -127,3 +155,5 @@
 
   quantityInput.addEventListener('input', updateTotal)
 </script>
+
+

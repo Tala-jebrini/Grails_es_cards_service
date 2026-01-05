@@ -144,3 +144,36 @@
     cursor: pointer;
 }
 
+/* ORDER OPTIONS */
+.order-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* مسافة بين كل option */
+}
+
+.order-option {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* مسافة بين label و input */
+}
+
+.order-option label {
+    font-size: 13px;
+    color: #ccc;
+}
+
+.order-option input {
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+}
+
+
+.required {
+    color: #ff4d4d;
+    margin-left: 4px;
+}
+
+
