@@ -1,5 +1,7 @@
 package es_cards_service
 
+import auth.User
+import cart.Cart
 import catalog.CategoryOption
 import catalog.Product
 import marketing.Banner
@@ -10,14 +12,31 @@ class BootStrap {
     def init = { servletContext ->
 
 
-        /* =========================
-          Users
-       ========================= */
+        // =========================
+        // USERS
+        // =========================
+        if (User.count() == 0) {
+            // Tala
+            def talaCart = new Cart(items: [])  // create cart first
+            def tala = new User(
+                    username: "Tala",
+                    email: "tala@tala.com",
+                    password: "123456",
+                    cart: talaCart           // assign cart immediately
+            ).save(failOnError: true)
 
-//        if (User.count() == 0) {
-//            new User(username: "john", email: "john@example.com", passwordHash: "hashedpass").save(failOnError:true)
-//            new User(username: "jane", email: "jane@example.com", passwordHash: "hashedpass").save(failOnError:true)
-//        }
+            // Jane
+            def janeCart = new Cart(items: [])
+            def jane = new User(
+                    username: "Jane",
+                    email: "jane@example.com",
+                    password: "abcdef",
+                    cart: janeCart
+            ).save(failOnError: true)
+        }
+
+
+
 
         /* =========================
           BANNERS

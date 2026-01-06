@@ -18,5 +18,6 @@ class User {
         username nullable: false, blank: false, unique: true
         email nullable: false, blank: false, unique: true, email: true
         password nullable: false, blank: false
+        orders nullable: true
     }
 }
