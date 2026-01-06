@@ -2,28 +2,41 @@ package auth
 
 class AuthController {
 
-    def index() {
-        // Show login page
-    }
+    AuthService authService
 
     def login() {
-        String email = params.email
-        String password = params.password
+        // Show login page
+        render(view: "login")
+    }
 
-        if (!email || !password) {
-            flash.error = "Email and password are required"
-            redirect(action: "index")
-            return
-        }
-
-        // Simple authentication (replace with real logic)
-        def user = User.findByEmailAndPassword(email, password)
+    def doLogin() {
+        def user = authService.login(params.email, params.password)
         if (user) {
             session.user = user
             redirect(uri: "/")
         } else {
             flash.error = "Invalid email or password"
-            redirect(action: "index")
+            redirect(action: "login")
         }
+    }
+
+    def register() {
+        render(view: "register")
+    }
+
+    def doRegister() {
+        def user = authService.register(params.email, params.username, params.password)
+        if (user) {
+            session.user = user
+            redirect(uri: "/")
+        } else {
+            flash.error = "Registration failed (email may already exist)"
+            redirect(action: "register")
+        }
+    }
+
+    def logout() {
+        authService.logout(session)
+        redirect(uri: "/")
     }
 }

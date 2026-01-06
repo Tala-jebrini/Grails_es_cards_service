@@ -196,6 +196,28 @@ class BootStrap {
                 required: true
         ).save(failOnError: true)
 
+        def ludo = Category.findByName("Yalla Ludo")
+
+        new CategoryOption(
+                category: ludo,
+                key: "playerId",
+                label: "Player ID",
+                type: "text",
+                placeholder: "Please Enter Player ID",
+                required: true
+        ).save(failOnError: true)
+
+        def xbox = Category.findByName("XBOX")
+
+        new CategoryOption(
+                category: xbox,
+                key: "notes",
+                label: "Notes",
+                type: "text",
+                placeholder: "If you have any notes, please write them here",
+                required: true
+        ).save(failOnError: true)
+
         /* =========================
                   CARTS
            ========================= */

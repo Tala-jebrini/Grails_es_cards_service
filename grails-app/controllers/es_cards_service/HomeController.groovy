@@ -2,7 +2,7 @@ package es_cards_service
 
 class HomeController {
 
-    HomeService homeService // injection تلقائي
+    HomeService homeService // injection
 
     def index() {
         def categories = homeService.getRootCategories()

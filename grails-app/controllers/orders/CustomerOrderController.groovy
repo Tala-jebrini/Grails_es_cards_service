@@ -18,4 +18,35 @@ class CustomerOrderController {
 
         render preview + [canOrder: canOrder]
     }
+
+    def placeOrder() {
+
+        if (!params.productId) {
+            flash.error = "Please select a product"
+            redirect(uri: request.getHeader("referer"))
+            return
+        }
+
+        def orderInfo = [:]
+
+        // dynamically collect order info
+        params.each { k, v ->
+            if (k.startsWith("order_")) {
+                orderInfo[k.replace("order_", "")] = v
+            }
+        }
+
+        orderService.createOrder(
+                session.user,
+                params.long("productId"),
+                params.int("quantity"),
+                orderInfo
+        )
+
+        redirect(action: "success")
+    }
+
+    def success() {}
 }
+
+

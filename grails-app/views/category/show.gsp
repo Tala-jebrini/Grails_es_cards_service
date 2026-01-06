@@ -26,8 +26,8 @@
     <g:each in="${subCategories}" var="sub">
       <a href="${createLink(controller:'category', action:'show', id: sub.id)}"
          class="subcategory-item">
-        <img class="subcategory-icon" src="${assetPath(src: category.iconPath)}"/>
-        <div class="subcategory-name">${category.name} ${sub.name}</div>
+        <img class="subcategory-icon" src="${assetPath(src: sub.iconPath ?: category.iconPath)}"/>
+        <div class="subcategory-name">${sub.name}</div>
       </a>
     </g:each>
   </section>
@@ -39,88 +39,103 @@
 <g:if test="${products}">
   <div class="products-order-container">
 
-    <!-- LEFT: Products -->
+    <!-- LEFT: PRODUCTS -->
     <section class="products-wrapper">
       <g:each in="${products}" var="p">
-        <div class="product-card" data-product-id="${p.id}" data-price="${p.price}">
+        <div class="product-card"
+             data-product-id="${p.id}"
+             data-price="${p.price}">
           <h4>${p.name}</h4>
           <p>$${p.price}</p>
         </div>
       </g:each>
     </section>
 
-    <!-- RIGHT: Order Panel -->
+    <!-- RIGHT: ORDER PANEL -->
     <section class="order-panel">
-      <div class="order-info-box">
-        <h3>Selected Product</h3>
-        <p id="selected-product">None</p>
-      </div>
 
-      <div class="quantity-box">
-        <h3>Quantity</h3>
-        <div class="quantity-controls">
-          <button type="button" id="decrease">-</button>
-          <input type="number" id="quantity" value="1" min="1"/>
-          <button type="button" id="increase">+</button>
+      <g:form controller="customerOrder" action="placeOrder">
+
+        <!-- hidden selected product -->
+        <input type="hidden" name="productId" id="productId"/>
+
+        <!-- Selected product -->
+        <div class="order-info-box">
+          <h3>Selected Product</h3>
+          <p id="selected-product">None</p>
         </div>
-      </div>
 
-    <div class="order-options">
-      <h3>Order Information</h3>
+        <!-- Quantity -->
+        <div class="quantity-box">
+          <h3>Quantity</h3>
+          <div class="quantity-controls">
+            <button type="button" id="decrease">-</button>
+            <input type="number" name="quantity" id="quantity" value="1" min="1"/>
+            <button type="button" id="increase">+</button>
+          </div>
+        </div>
 
-      <g:each in="${orderOptions}" var="opt">
-        <div class="order-option">
+        <!-- Order Options (HYBRID) -->
+        <div class="order-options">
+          <h3>Order Information</h3>
 
-          <label for="${opt.key}">
-            ${opt.label}
-            <g:if test="${opt.required}">
-              <span class="required">*</span>
-            </g:if>
-          </label>
+          <g:each in="${orderOptions}" var="opt">
+            <div class="order-option">
 
-          <input
-                  id="${opt.key}"
-                  type="${opt.type}"
-                  name="${opt.key}"
-                  placeholder="${opt.placeholder}"
-                  <g:if test="${opt.required}">required</g:if>
-          />
+              <label>
+                ${opt.label}
+                <g:if test="${opt.required}">
+                  <span class="required">*</span>
+                </g:if>
+              </label>
+
+              <input
+                      type="${opt.type}"
+                      name="order_${opt.key}"
+                      placeholder="${opt.placeholder}"
+                      <g:if test="${opt.required}">required</g:if>
+              />
+            </div>
+          </g:each>
+        </div>
+
+        <!-- Final -->
+        <div class="final-order-box">
+          <p id="order-total">Total: $0.00</p>
+
+          <g:if test="${session.user}">
+            <button type="submit">Place Order</button>
+          </g:if>
+          <g:else>
+            <a href="${createLink(controller:'auth', action:'login')}" class="btn">
+              Login to Order
+            </a>
+          </g:else>
+
 
         </div>
-      </g:each>
 
-    </div>
+      </g:form>
 
-
-    <div class="final-order-box">
-
-        <p id="order-total">Total: $0.00</p>
-
-        <g:if test="${session.user}">
-          <button id="order-button">Place Order</button>
-        </g:if>
-        <g:else>
-          <a href="/login" class="btn">Login to Order</a>
-        </g:else>
-      </div>
-
-  </section>
+    </section>
 
   </div>
 </g:if>
 
 <!-- =========================
-     JS: Product Selection + Quantity + Total
+     JS
 ========================= -->
 <script>
   let selectedProduct = null
+
   const productCards = document.querySelectorAll('.product-card')
   const selectedProductElem = document.getElementById('selected-product')
   const quantityInput = document.getElementById('quantity')
   const orderTotal = document.getElementById('order-total')
+  const hiddenProductId = document.getElementById('productId')
 
   function updateTotal() {
-    if(selectedProduct){
+    if (selectedProduct) {
       const price = parseFloat(selectedProduct.dataset.price)
       const qty = parseInt(quantityInput.value)
       orderTotal.textContent = "Total: $" + (price * qty).toFixed(2)
@@ -130,30 +145,30 @@
   // Product selection
   productCards.forEach(card => {
     card.addEventListener('click', () => {
-      // Deselect all
+
       productCards.forEach(c => c.classList.remove('selected'))
-      // Select this one
       card.classList.add('selected')
+
       selectedProduct = card
       selectedProductElem.textContent = card.querySelector('h4').textContent
+      hiddenProductId.value = card.dataset.productId
+
       updateTotal()
     })
   })
 
   // Quantity controls
   document.getElementById('increase').addEventListener('click', () => {
-    quantityInput.value = parseInt(quantityInput.value)+1
+    quantityInput.value = parseInt(quantityInput.value) + 1
     updateTotal()
   })
 
   document.getElementById('decrease').addEventListener('click', () => {
-    if(quantityInput.value > 1){
-      quantityInput.value = parseInt(quantityInput.value)-1
+    if (quantityInput.value > 1) {
+      quantityInput.value = parseInt(quantityInput.value) - 1
       updateTotal()
     }
   })
 
   quantityInput.addEventListener('input', updateTotal)
 </script>
-
-

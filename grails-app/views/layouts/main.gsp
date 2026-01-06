@@ -48,9 +48,10 @@
 
     <div class="navbar-right">
         <input class="search-box" placeholder="Search..."/>
-        <a href="/login" class="btn">Login</a>
-        <a href="/register" class="btn">Sign Up</a>
+        <g:link controller="auth" action="login" class="btn">Login</g:link>
+        <g:link controller="auth" action="register" class="btn">Sign Up</g:link>
     </div>
+
 </nav>
 
 <!-- PAGE CONTENT -->
