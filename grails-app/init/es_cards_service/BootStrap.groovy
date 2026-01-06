@@ -234,7 +234,7 @@ class BootStrap {
                 label: "Notes",
                 type: "text",
                 placeholder: "If you have any notes, please write them here",
-                required: true
+                required: false
         ).save(failOnError: true)
 
         /* =========================

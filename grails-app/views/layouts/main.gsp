@@ -37,7 +37,10 @@
     <div class="navbar-left">
         <img src="${request.contextPath}/assets/logo/logo.png" class="logo"/>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
+            <li>
+                <g:link controller="home" action="index" class="btn">Home</g:link>
+            </li>
+
             <li><a href="/categories">Categories</a></li>
             <li><a href="/faq">FAQ</a></li>
             <li><a href="/about">About</a></li>

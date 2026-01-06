@@ -1,72 +1,43 @@
 package orders
 
-import catalog.Product
 import auth.User
+import catalog.Product
 import groovy.json.JsonOutput
 import grails.gorm.transactions.Transactional
 
 @Transactional
 class OrderService {
 
-    CustomerOrder createOrder(
-            User user,
-            Long productId,
-            Integer quantity,
-            Map orderInfo
-    ) {
+    // Build a preview of the order
 
+    Map buildOrderPreview(Product product, int quantity) {
+        return [
+                productName: product.name,
+                quantity   : quantity,
+                total      : product.price * quantity
+        ]
+    }
+
+    //Create an order
+
+    CustomerOrder createOrder(User user, Long productId, int quantity, Map orderInfo) {
         Product product = Product.get(productId)
-        if (!product) {
-            throw new IllegalArgumentException("Product not found")
-        }
+        if (!product) throw new RuntimeException("Product not found")
 
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Invalid quantity")
-        }
-
-        BigDecimal total = product.price * quantity
-
+        // Create the order
         def order = new CustomerOrder(
                 user: user,
-                status: "NEW",
-                totalAmount: total,
-                orderInfoJson: JsonOutput.toJson(orderInfo) // JSON
-        )
+                orderInfoJson: JsonOutput.toJson(orderInfo)
+        ).save(failOnError: true)
 
-        order.save(failOnError: true)
-
-        def item = new CustomerOrderItem(
+        // Add items to the order
+        new CustomerOrderItem(
                 order: order,
                 product: product,
                 quantity: quantity,
-                unitPrice: product.price
-        )
-
-        item.save(failOnError: true)
+                priceAtPurchase: product.price
+        ).save(failOnError: true)
 
         return order
     }
 }
-
-//class OrderService {
-//
-//    BigDecimal calculateTotal(Product product, int quantity) {
-//        if (!product || quantity <= 0) {
-//            return 0
-//        }
-//        return product.price * quantity
-//    }
-//
-//    boolean canPlaceOrder(def user) {
-//        return user != null
-//    }
-//
-//    Map buildOrderPreview(Product product, int quantity) {
-//        return [
-//                productName: product?.name,
-//                unitPrice : product?.price ?: 0,
-//                quantity  : quantity,
-//                total     : calculateTotal(product, quantity)
-//        ]
-//    }
-//}

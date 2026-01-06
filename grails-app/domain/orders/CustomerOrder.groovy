@@ -6,6 +6,8 @@ class CustomerOrder {
 
     Date createdAt = new Date()
     String orderInfoJson
+    //BigDecimal totalAmount
+
 
 
     static hasMany = [items: CustomerOrderItem]
