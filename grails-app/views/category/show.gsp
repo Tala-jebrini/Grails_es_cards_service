@@ -91,7 +91,7 @@
 
               <input
                       type="${opt.type}"
-                      name="order_${opt.key}"
+                      name="order_${opt.optionKey}"
                       placeholder="${opt.placeholder}"
                       <g:if test="${opt.required}">required</g:if>
               />

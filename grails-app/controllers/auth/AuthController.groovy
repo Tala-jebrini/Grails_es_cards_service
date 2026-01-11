@@ -35,8 +35,14 @@ class AuthController {
         }
     }
 
+//    def logout() {
+//        authService.logout(session)
+//        redirect(uri: "/")
+//    }
+
     def logout() {
-        authService.logout(session)
+        session.invalidate()
         redirect(uri: "/")
     }
+
 }

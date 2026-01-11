@@ -51,8 +51,29 @@
 
     <div class="navbar-right">
         <input class="search-box" placeholder="Search..."/>
-        <g:link controller="auth" action="login" class="btn">Login</g:link>
-        <g:link controller="auth" action="register" class="btn">Sign Up</g:link>
+        <g:if test="${session.user}">
+            <span class="username">
+                Hello, ${session.user.username}
+            </span>
+
+            <g:link controller="customerOrder" action="history" class="btn">
+                My Orders
+            </g:link>
+
+            <g:link controller="cart" action="show" class="btn">
+                Cart
+            </g:link>
+
+            <g:link controller="auth" action="logout" class="btn">
+                Logout
+            </g:link>
+        </g:if>
+
+        <g:else>
+            <g:link controller="auth" action="login" class="btn">Login</g:link>
+            <g:link controller="auth" action="register" class="btn">Sign Up</g:link>
+        </g:else>
+
     </div>
 
 </nav>

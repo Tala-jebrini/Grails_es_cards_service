@@ -6,10 +6,10 @@ class CustomerOrder {
 
     Date createdAt = new Date()
     String orderInfoJson
-    //BigDecimal totalAmount
+    BigDecimal totalAmount
 
 
-
+    static mappedBy = [items: "order"]
     static hasMany = [items: CustomerOrderItem]
     static belongsTo = [user: User]
 

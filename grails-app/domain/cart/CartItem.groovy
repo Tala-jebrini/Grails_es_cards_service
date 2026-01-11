@@ -7,7 +7,7 @@ class CartItem {
     Product product
     Integer quantity
 
-    static belongsTo = [cart: Cart, product: Product]
+    static belongsTo = [cart: Cart]
 
     static constraints = {
         product nullable: false

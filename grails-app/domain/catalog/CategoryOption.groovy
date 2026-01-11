@@ -2,7 +2,7 @@ package catalog
 
 class CategoryOption {
 
-    String key            // Json key
+    String optionKey            // Json key
     String label          // For user display
     String placeholder
     String type           // String, Integer,...
@@ -15,7 +15,7 @@ class CategoryOption {
     static constraints = {
         category nullable: false
         placeholder nullable: true
-        key nullable: false
+        optionKey nullable: false
         label nullable: false
         type nullable: false
         required nullable: false

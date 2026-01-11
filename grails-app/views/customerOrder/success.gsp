@@ -1,62 +1,144 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="layout" content="main"/>
-  <title>Order Placed</title>
-  <link rel="stylesheet" href="${request.contextPath}/assets/style.css">
+<%@ page contentType="text/html;charset=UTF-8" %>
+<meta name="layout" content="main"/>
 
-  <style>
-  /* Center the box in the middle of the page */
-  .success-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
-  }
+<style>
+.orders-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  color: #333; /* Make sure text is visible */
+}
 
-  .success-box {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 40px;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    font-family: Arial, sans-serif;
-  }
+.order-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  padding: 25px;
+  margin-bottom: 30px;
+  color: #333; /* Force black text */
+}
 
-  .success-box h1 {
-    color: #4CAF50;
-    margin-bottom: 20px;
-  }
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  .success-box p {
-    margin-bottom: 30px;
-    font-size: 18px;
-  }
+.order-header h1 {
+  margin: 0;
+  font-size: 1.6em;
+  color: #2c3e50;
+}
 
-  .success-box a {
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
+.order-header small {
+  color: #555;
+}
 
-  .success-box a:hover {
-    background-color: #45a049;
-  }
-  </style>
-</head>
-<body>
-<div class="success-container">
-  <div class="success-box">
-    <h1>Thank you!</h1>
-    <p>Your order has been successfully placed.</p>
-    <a href="/">Go back to home</a>
+.order-items table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  color: #333; /* Ensure table text is visible */
+}
+
+.order-items th, .order-items td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  color: #333; /* Force table text black */
+}
+
+.order-items th {
+  background: #f8f8f8;
+  font-weight: 600;
+}
+
+.total-row td {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.btn-home {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  background-color: #27ae60;
+  transition: 0.2s;
+}
+
+.btn-home:hover {
+  background-color: #1e8449;
+}
+
+.btn-orders {
+  background-color: #2980b9;
+}
+
+.btn-orders:hover {
+  background-color: #1c5980;
+}
+</style>
+
+<div class="orders-wrapper">
+  <div class="order-card">
+
+    <div class="order-header">
+      <div>
+        <h1>Order Placed Successfully 🎉</h1>
+        <small>
+          Order #${order.id} &nbsp;|&nbsp;
+          <g:formatDate date="${order.createdAt}" format="yyyy-MM-dd HH:mm"/>
+        </small>
+      </div>
+      <div>
+        Total: <strong>$${order.totalAmount}</strong>
+      </div>
+    </div>
+
+    <div class="order-items">
+      <table>
+        <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <g:each in="${order.items}" var="item">
+          <tr>
+            <td>${item.product.name}</td>
+            <td>${item.quantity}</td>
+            <td>$${item.priceAtPurchase}</td>
+            <td>$${item.priceAtPurchase * item.quantity}</td>
+          </tr>
+        </g:each>
+        <tr class="total-row">
+          <td colspan="3">Total</td>
+          <td>$${order.totalAmount}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="actions">
+      <a href="${createLink(controller:'category', action:'show', id:1)}" class="btn-home">
+        Continue Shopping
+      </a>
+      <a href="${createLink(controller:'customerOrder', action:'history')}" class="btn-home btn-orders">
+        View My Orders
+      </a>
+    </div>
+
   </div>
 </div>
-</body>
-</html>
